@@ -1,3 +1,4 @@
+[README.md](https://github.com/user-attachments/files/27012521/README.md)
 # Daria · `Andy-randy`
 
 **Automation engineer · n8n + LLM**
@@ -29,9 +30,9 @@ I build automation systems that replace manual ops work — not one-off scripts,
 **Стек.** `n8n` · `Groq` · `Telegram Bot API` · `Google Sheets`
 
 #### 🎯 Воронка лидов с LLM-классификатором
-**Контекст.** Входящие лиды надо делить по температуре и распределять по каналам: холодных — в nurture-рассылку, тёплых — в CRM менеджеру с уведомлением, горячих — на прямой контакт.  
-**Система.** Webhook принимает данные лида → AI-агент на Groq классифицирует его как холодный / тёплый / горячий → Switch маршрутизирует: холодные → email через Gmail + лог в Google Sheets; тёплые → уведомление менеджеру в Telegram + карточка в Bitrix24 через REST API; горячие → прямой email.  
-**Что интересно.** Классификатор — не regex и не набор правил, а LLM, которая корректно разбирает расплывчатые формулировки в заявках («подумаю», «нужно срочно», «сколько примерно стоит»). Webhook как универсальная точка входа — подключается любая форма, лендинг или чат.  
+**Контекст.** Входящие лиды надо делить по температуре и распределять по каналам: холодных — в автоматическую рассылку с логом для аналитики, тёплых — в аккуратный email без нагрузки на менеджера, горячих — сразу в CRM со сделкой и пингом менеджеру.  
+**Система.** Webhook принимает данные лида → AI-агент на Groq классифицирует его как холодный / тёплый / горячий → Switch маршрутизирует: холодные → письмо через Gmail + лог в Google Sheets; тёплые → email через Gmail; горячие → уведомление менеджеру в Telegram + создание сделки в Bitrix24 через REST API.  
+**Что интересно.** Классификатор — не regex и не набор правил, а LLM, которая корректно разбирает расплывчатые формулировки в заявках («подумаю», «нужно срочно», «сколько примерно стоит»). Разная нагрузка на менеджера по температуре: горячий лид = моментальная сделка и пинг, тёплый = тихий email, холодный = без участия менеджера вообще. Webhook как универсальная точка входа — подключается любая форма, лендинг или чат.  
 **Стек.** `n8n` · `Groq` · Webhook · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
 
 #### 🔍 Умный парсер вакансий с LLM-скорингом
@@ -87,9 +88,9 @@ I specialise in n8n workflows with LLM integrations: AI agents for sales and ord
 **Stack.** `n8n` · `Groq` · `Telegram Bot API` · `Google Sheets`
 
 #### 🎯 Lead funnel with an LLM classifier
-**Context.** Incoming leads need to be split by temperature and routed to the right channel: cold into a nurture email flow, warm to a sales manager with a CRM card, hot to direct contact.  
-**System.** A webhook receives the lead → an AI agent on Groq classifies it as cold / warm / hot → a Switch node routes it: cold → Gmail + log in Google Sheets; warm → Telegram alert to the manager + a Bitrix24 card via REST API; hot → direct email.  
-**What's interesting.** The classifier isn't a regex or a set of rules — it's an LLM that correctly handles vague wording in real lead forms ("just thinking", "need it urgently", "roughly how much"). The webhook acts as a universal entry point — any form, landing page or chat can plug in.  
+**Context.** Incoming leads need to be split by temperature and routed to the right channel: cold into an automated email flow with a log for analytics, warm to a quiet email that doesn't tie up a manager, hot straight into CRM as a deal with a manager ping.  
+**System.** A webhook receives the lead → an AI agent on Groq classifies it as cold / warm / hot → a Switch node routes it: cold → Gmail + log in Google Sheets; warm → email via Gmail; hot → Telegram alert to the manager + a deal created in Bitrix24 via REST API.  
+**What's interesting.** The classifier isn't a regex or a set of rules — it's an LLM that correctly handles vague wording in real lead forms ("just thinking", "need it urgently", "roughly how much"). Manager load scales with temperature: hot lead = instant deal and ping, warm = silent email, cold = no manager involvement at all. The webhook acts as a universal entry point — any form, landing page or chat can plug in.  
 **Stack.** `n8n` · `Groq` · Webhook · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
 
 #### 🔍 Smart vacancy parser with LLM-based scoring
