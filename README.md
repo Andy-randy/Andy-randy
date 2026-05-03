@@ -1,11 +1,9 @@
-[README.md](https://github.com/user-attachments/files/27012521/README.md)
-# Daria · `Andy-randy`
+[README_main_profile_rewritten.md](https://github.com/user-attachments/files/27321882/README_main_profile_rewritten.md)
+# Daria Lesnikova ·
 
-**Automation engineer · n8n + LLM**
+**n8n Automation Specialist · LLM Workflows · AI Agents**
 
-Собираю системы, которые заменяют ручные операционные процессы — не одноразовые скрипты, а воркфлоу с AI-агентами, обработкой ошибок и документацией, готовые к эксплуатации.
-
-I build automation systems that replace manual ops work — not one-off scripts, but workflows with AI agents, error handling, and documentation ready for production.
+I build practical automation workflows that reduce manual work: lead routing, AI-assisted customer communication, data parsing, CRM updates, notifications, and structured reporting.
 
 [🇷🇺 По-русски](#-по-русски) · [🇬🇧 In English](#-in-english)
 
@@ -13,113 +11,293 @@ I build automation systems that replace manual ops work — not one-off scripts,
 
 ## 🇷🇺 По-русски
 
-### О чём это портфолио
+### Кто я
 
-Специализируюсь на n8n с интеграцией LLM: AI-агенты для продаж и обработки заказов, маршрутизация лидов, парсинг данных с LLM-скорингом. В репозитории [`n8n-portfolio`](https://github.com/Andy-randy/n8n-portfolio) — готовые воркфлоу с описанием и экспортированным JSON.
+Я развиваюсь как специалист по автоматизации на базе **n8n, LLM и API-интеграций**.
 
-**Сейчас:** open to freelance · ищу позиции automation / workflow engineer  
-**В фокусе роста:** RAG и vector DBs, LangChain / CrewAI, продакшен-деплой в Docker  
-**Языки:** русский, английский
+Мой фокус — не «бот ради бота», а рабочие процессы для бизнеса:
 
-### Избранные кейсы
+- обработка входящих заявок;
+- AI-квалификация лидов;
+- Telegram- и email-уведомления;
+- интеграции с CRM, Google Sheets, Notion и внешними API;
+- парсинг и нормализация данных;
+- workflow-документация, чтобы проект можно было передать другому человеку.
 
-#### 🤖 AI-ассистент, который сам закрывает заказы
-**Контекст.** Владельцу бизнеса нужен бот, который ведёт клиента от первого сообщения до подтверждения заказа — и сам понимает, когда собрано достаточно данных, чтобы оформить сделку, а не мучает клиента лишними вопросами.  
-**Система.** Telegram-триггер → AI-агент на Groq c Simple Memory → разветвление: если агент считает, что пора подтверждать — бот отправляет клиенту подтверждение, структурирует данные, пишет заказ в Google Sheets и уведомляет менеджера; если нет — задаёт уточняющий вопрос.  
-**Что интересно.** Переход между стадиями «разговор → подтверждение» принимает LLM, а не жёсткий if-else по ключевым словам. За счёт этого сценарий не ломается на «нестандартных» клиентах. Уведомление менеджера — отдельный узел, чтобы не тормозить ответ клиенту.  
-**Стек.** `n8n` · `Groq` · `Telegram Bot API` · `Google Sheets`
+Основной репозиторий с проектами: [`n8n-portfolio`](https://github.com/Andy-randy/n8n-portfolio)
 
-#### 🎯 Воронка лидов с LLM-классификатором
-**Контекст.** Входящие лиды надо делить по температуре и распределять по каналам: холодных — в автоматическую рассылку с логом для аналитики, тёплых — в аккуратный email без нагрузки на менеджера, горячих — сразу в CRM со сделкой и пингом менеджеру.  
-**Система.** Webhook принимает данные лида → AI-агент на Groq классифицирует его как холодный / тёплый / горячий → Switch маршрутизирует: холодные → письмо через Gmail + лог в Google Sheets; тёплые → email через Gmail; горячие → уведомление менеджеру в Telegram + создание сделки в Bitrix24 через REST API.  
-**Что интересно.** Классификатор — не regex и не набор правил, а LLM, которая корректно разбирает расплывчатые формулировки в заявках («подумаю», «нужно срочно», «сколько примерно стоит»). Разная нагрузка на менеджера по температуре: горячий лид = моментальная сделка и пинг, тёплый = тихий email, холодный = без участия менеджера вообще. Webhook как универсальная точка входа — подключается любая форма, лендинг или чат.  
-**Стек.** `n8n` · `Groq` · Webhook · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
+**Сейчас:** открыта к freelance-задачам и junior / junior+ позициям в automation / workflow engineering.  
+**В фокусе роста:** RAG, Supabase / vector DB, Docker, production deployment, прикладной Python.  
+**Языки:** русский, английский.
 
-#### 🔍 Умный парсер вакансий с LLM-скорингом
-**Контекст.** Поиск работы через ленту HH.ru быстро превращается в ручную фильтрацию десятков постов в день: открыть, пробежать глазами, закрыть, повторить. Нужен инструмент, который оставляет только релевантные вакансии — и по содержанию, и по формальным требованиям.  
-**Система.** HTTP GET к HH.ru API → JavaScript нормализует поля (зарплата, формат работы, описание) → Loop по вакансиям → AI-агент на Groq с фиксированным промптом под мои навыки оценивает каждую → IF проверяет жёсткие условия (зарплата ≥ 100k AND удалёнка). Подходящие собираются в Telegram-дайджест через Aggregate + Code; остальные уходят отдельным сообщением — чтобы ничего не потерялось.  
-**Что интересно.** Чистое разделение ответственности между LLM и детерминированной логикой: Groq судит о содержании (соответствуют ли навыки описанию), IF обрабатывает объективные критерии (зарплата, формат). LLM не считает числа — где она ошибается чаще всего. Плюс реальное использование: этим парсером я сама отсмотрела ~10 вакансий при поиске работы и определила лучший fit для себя.  
-**Стек.** `n8n` · `Groq` · `HH.ru API` · `Telegram Bot API` · JavaScript
+---
 
-> **Ещё проекты в репозитории:** новостной дайджест из RSS, обработка заказов для e-commerce, HR-онбординг, финансовый мониторинг, AI-репурпозинг контента, клиентский букинг-бот, автоматизации для Notion через API.
+## Избранные проекты
 
-### Чему учусь на чужих воркфлоу
+### 🤖 AI-ассистент, который сам закрывает заказы
 
-Помимо своих проектов — разбираю готовые шаблоны сложных n8n-систем, чтобы понять архитектурные решения. Например, финансовый трекер с мультиформатным вводом (photo / PDF / text), OCR-пайплайнами через Google Gemini и Structured Output Parser для нормализации данных. Читать чужой код — отдельный навык, и мне кажется правильным прокачивать его параллельно с построением собственных систем.
+**Задача:** автоматизировать общение с клиентом от первого сообщения до подтверждения заказа.
 
-### Стек
+**Как работает:**
 
-**Automation** `n8n` · webhooks · subworkflows · error handling · cron  
-**AI / LLM** `Groq` · `OpenAI` · prompt engineering · AI-агенты с памятью  
-**Backend** `Python` · REST API · `Docker` · `Git`  
-**Data & tools** `Google Sheets` · `Notion API` · `Bitrix24` · `Telegram Bot API`
+```text
+Telegram Trigger
+→ AI Agent + Simple Memory
+→ проверка готовности к заказу
+→ Google Sheets
+→ Telegram-уведомление менеджеру
+```
 
-### Как я работаю с задачей
+**Что важно:**
 
-1. Разбираем в бизнес-терминах: какой процесс, где теряется время, где риски ошибок.
-2. Рисую схему: точки интеграции, точки отказа, что логируется.
-3. MVP → демо → итерируем. Не пытаюсь «сразу идеально».
-4. Документация: README, комментарии в узлах, отдельный лог ошибок и решений — чтобы следующий человек (или я через месяц) разобрался без моих объяснений.
+- AI Agent ведёт диалог и собирает данные клиента.
+- Simple Memory хранит контекст разговора.
+- LLM сама определяет, когда данных достаточно для оформления заказа.
+- Менеджер получает уже структурированную заявку, а не сырую переписку.
 
-### Контакты
+**Стек:** `n8n` · `Groq` · `Telegram Bot API` · `Google Sheets`
+
+---
+
+### 🎯 Воронка лидов с LLM-классификатором
+
+**Задача:** автоматически разделять входящие заявки на холодные, тёплые и горячие.
+
+**Как работает:**
+
+```text
+Webhook
+→ AI Agent
+→ Code node
+→ Switch
+├── холодный лид → email + Google Sheets
+├── тёплый лид → email + Google Sheets
+├── горячий лид → Telegram manager ping + Bitrix24 CRM
+└── fallback → Telegram error notification
+```
+
+**Что важно:**
+
+- AI Agent анализирует заявку по смыслу, а не по ключевым словам.
+- Code node чистит и парсит JSON-ответ модели.
+- Из текста заявки извлекается бюджет.
+- Для горячего лида создаётся сделка в Bitrix24 через REST API.
+- Ошибки AI-формата уходят в fallback-ветку.
+
+**Стек:** `n8n` · `Groq` · `Webhook` · `JavaScript` · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
+
+---
+
+### 🔍 Умный парсер вакансий с LLM-скорингом
+
+**Задача:** сократить ручную фильтрацию вакансий и оставлять только релевантные варианты.
+
+**Как работает:**
+
+```text
+Schedule / Manual Trigger
+→ HH.ru API
+→ JavaScript normalization
+→ Loop Over Items
+→ AI scoring
+→ IF filter
+→ Telegram digest
+```
+
+**Что важно:**
+
+- Детерминированная логика проверяет объективные условия: зарплата, формат работы.
+- LLM оценивает смысловую релевантность вакансии.
+- Результаты собираются в Telegram-дайджест.
+- Неподходящие вакансии тоже логируются отдельно, чтобы ничего не терялось.
+
+**Стек:** `n8n` · `Groq` · `HH.ru API` · `Telegram Bot API` · `JavaScript`
+
+---
+
+## Дополнительные проекты
+
+В портфолио также есть:
+
+- RSS / news digest automation;
+- e-commerce order processing;
+- HR onboarding workflow;
+- financial monitoring;
+- AI content repurposing;
+- customer support routing;
+- Notion API automations.
+
+---
+
+## Технический стек
+
+**Automation:** `n8n` · Webhook · Schedule Trigger · Switch · IF · Loop · Aggregate · Error handling  
+**AI / LLM:** `Groq` · AI Agent · Simple Memory · structured JSON output · prompt engineering  
+**Integrations:** `Telegram Bot API` · `Gmail` · `Google Sheets` · `Bitrix24 REST API` · `Notion API` · `HH.ru API`  
+**Code:** `JavaScript` для Code node · базовый `Python` · REST API · JSON  
+**Tools:** `Git` · `GitHub` · `Docker` · `VS Code`
+
+---
+
+## Как я подхожу к автоматизации
+
+1. Сначала разбираю бизнес-процесс: где теряется время, где ручной труд, где ошибки.
+2. Рисую схему workflow: входные данные, ветки, интеграции, fallback.
+3. Собираю MVP и проверяю на тестовых данных.
+4. Добавляю обработку ошибок, логирование и понятные названия нод.
+5. Документирую проект: README, пример входных данных, workflow export, скрин архитектуры.
+
+---
+
+## Контакты
 
 - Telegram: [@Andyyy_Randyyy](https://t.me/Andyyy_Randyyy)
 - GitHub: [Andy-randy](https://github.com/Andy-randy)
-- Портфолио воркфлоу: [n8n-portfolio](https://github.com/Andy-randy/n8n-portfolio)
+- Workflow portfolio: [n8n-portfolio](https://github.com/Andy-randy/n8n-portfolio)
 
 ---
 
 ## 🇬🇧 In English
 
-### About this profile
+### About me
 
-I specialise in n8n workflows with LLM integrations: AI agents for sales and order processing, lead routing, data parsing with LLM-based scoring. The [`n8n-portfolio`](https://github.com/Andy-randy/n8n-portfolio) repository has the workflows with descriptions and exported JSON.
+I am developing as an automation specialist focused on **n8n, LLM workflows, and API integrations**.
 
-**Currently:** open to freelance · looking for automation / workflow engineer roles  
-**Growing into:** RAG and vector DBs, LangChain / CrewAI, production deployment with Docker  
-**Languages:** Russian, English
+My focus is not “a bot for the sake of a bot”, but practical business automation:
 
-### Selected case studies
+- incoming lead processing;
+- AI lead qualification;
+- Telegram and email notifications;
+- CRM, Google Sheets, Notion, and external API integrations;
+- data parsing and normalization;
+- workflow documentation so the project can be maintained or handed over.
 
-#### 🤖 AI assistant that closes orders on its own
-**Context.** A business owner needs a bot that guides the customer from first message to order confirmation — and figures out by itself when it has enough data to close, instead of drowning the client in clarifying questions.  
-**System.** Telegram trigger → an AI agent on Groq with Simple Memory → branching: if the agent decides it's time to confirm, the bot sends a confirmation to the customer, structures the data, writes the order to Google Sheets and notifies the manager; if not, it asks a follow-up question.  
-**What's interesting.** The decision to move from "conversation" to "confirmation" is made by the LLM, not by a hard-coded if-else on keywords — so the flow doesn't break on non-standard customers. The manager notification is a separate node so it never slows down the customer-facing reply.  
-**Stack.** `n8n` · `Groq` · `Telegram Bot API` · `Google Sheets`
+Main project repository: [`n8n-portfolio`](https://github.com/Andy-randy/n8n-portfolio)
 
-#### 🎯 Lead funnel with an LLM classifier
-**Context.** Incoming leads need to be split by temperature and routed to the right channel: cold into an automated email flow with a log for analytics, warm to a quiet email that doesn't tie up a manager, hot straight into CRM as a deal with a manager ping.  
-**System.** A webhook receives the lead → an AI agent on Groq classifies it as cold / warm / hot → a Switch node routes it: cold → Gmail + log in Google Sheets; warm → email via Gmail; hot → Telegram alert to the manager + a deal created in Bitrix24 via REST API.  
-**What's interesting.** The classifier isn't a regex or a set of rules — it's an LLM that correctly handles vague wording in real lead forms ("just thinking", "need it urgently", "roughly how much"). Manager load scales with temperature: hot lead = instant deal and ping, warm = silent email, cold = no manager involvement at all. The webhook acts as a universal entry point — any form, landing page or chat can plug in.  
-**Stack.** `n8n` · `Groq` · Webhook · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
+**Currently:** open to freelance tasks and junior / junior+ automation or workflow engineering roles.  
+**Growing into:** RAG, Supabase / vector DBs, Docker, production deployment, practical Python.  
+**Languages:** Russian, English.
 
-#### 🔍 Smart vacancy parser with LLM-based scoring
-**Context.** Job hunting on HH.ru quickly turns into manually filtering dozens of postings a day: open, skim, close, repeat. You need a tool that leaves only the relevant ones — both by content and by hard requirements.  
-**System.** HTTP GET to the HH.ru API → JavaScript normalises the fields (salary, work format, description) → Loop over items → an AI agent on Groq with a fixed prompt tuned to my skills evaluates each posting → an IF node applies hard conditions (salary ≥ 100k AND remote). Matching vacancies go into a Telegram digest via Aggregate + Code; the rest go into a separate message — so nothing gets lost.  
-**What's interesting.** A clean split of responsibilities between the LLM and deterministic logic: Groq judges content (do the skills match the description), the IF handles objective criteria (salary, work format). The LLM doesn't do the maths — which is where it's weakest. Plus real usage: I used this parser myself to review ~10 postings during my own job search and identify my best-fit role.  
-**Stack.** `n8n` · `Groq` · `HH.ru API` · `Telegram Bot API` · JavaScript
+---
 
-> **More projects in the repository:** RSS news digest, e-commerce order processing, HR onboarding, financial monitoring, AI content repurposing, customer booking bot, Notion API automations.
+## Selected Projects
 
-### What I've been studying from others' workflows
+### 🤖 AI Assistant That Closes Orders
 
-Alongside my own projects, I dig into ready-made templates of complex n8n systems to understand the architectural choices behind them. For example, a finance tracker with multi-format input (photo / PDF / text), OCR pipelines through Google Gemini, and a Structured Output Parser for data normalisation. Reading someone else's code is a separate skill, and I think it's worth training alongside building my own systems.
+**Goal:** automate customer communication from the first message to order confirmation.
 
-### Stack
+**Workflow:**
 
-**Automation** `n8n` · webhooks · subworkflows · error handling · cron  
-**AI / LLM** `Groq` · `OpenAI` · prompt engineering · AI agents with memory  
-**Backend** `Python` · REST APIs · `Docker` · `Git`  
-**Data & tools** `Google Sheets` · `Notion API` · `Bitrix24` · `Telegram Bot API`
+```text
+Telegram Trigger
+→ AI Agent + Simple Memory
+→ order readiness check
+→ Google Sheets
+→ Telegram manager notification
+```
 
-### How I approach a project
+**Key points:**
 
-1. Frame the task in business terms — which process, where time is lost, where the risk of errors sits.
-2. Sketch the system: integration points, failure points, what gets logged.
-3. MVP → demo → iterate. No pretending to ship it perfect on the first try.
-4. Document: a README, comments in the nodes, and a separate log of mistakes and fixes — so that the next person (or me in a month) can figure it out without my explanations.
+- The AI Agent talks to the customer and collects order details.
+- Simple Memory keeps the conversation context.
+- The LLM decides when enough information has been collected.
+- The manager receives structured order data instead of raw chat messages.
 
-### Contacts
+**Stack:** `n8n` · `Groq` · `Telegram Bot API` · `Google Sheets`
+
+---
+
+### 🎯 Lead Funnel With an LLM Classifier
+
+**Goal:** automatically classify incoming leads as cold, warm, or hot.
+
+**Workflow:**
+
+```text
+Webhook
+→ AI Agent
+→ Code node
+→ Switch
+├── cold lead → email + Google Sheets
+├── warm lead → email + Google Sheets
+├── hot lead → Telegram manager ping + Bitrix24 CRM
+└── fallback → Telegram error notification
+```
+
+**Key points:**
+
+- The AI Agent analyzes the meaning of the request, not just keywords.
+- The Code node cleans and parses the model’s JSON output.
+- The budget is extracted from the request text.
+- Hot leads are sent to Bitrix24 CRM through REST API.
+- Invalid AI output is handled through a fallback branch.
+
+**Stack:** `n8n` · `Groq` · `Webhook` · `JavaScript` · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
+
+---
+
+### 🔍 Smart Vacancy Parser With LLM Scoring
+
+**Goal:** reduce manual job-search filtering and keep only relevant vacancies.
+
+**Workflow:**
+
+```text
+Schedule / Manual Trigger
+→ HH.ru API
+→ JavaScript normalization
+→ Loop Over Items
+→ AI scoring
+→ IF filter
+→ Telegram digest
+```
+
+**Key points:**
+
+- Deterministic logic checks objective conditions: salary and work format.
+- The LLM evaluates semantic relevance.
+- Matching vacancies are collected into a Telegram digest.
+- Non-matching vacancies are logged separately so nothing gets lost.
+
+**Stack:** `n8n` · `Groq` · `HH.ru API` · `Telegram Bot API` · `JavaScript`
+
+---
+
+## Additional Projects
+
+The portfolio also includes:
+
+- RSS / news digest automation;
+- e-commerce order processing;
+- HR onboarding workflow;
+- financial monitoring;
+- AI content repurposing;
+- customer support routing;
+- Notion API automations.
+
+---
+
+## Technical Stack
+
+**Automation:** `n8n` · Webhook · Schedule Trigger · Switch · IF · Loop · Aggregate · Error handling  
+**AI / LLM:** `Groq` · AI Agent · Simple Memory · structured JSON output · prompt engineering  
+**Integrations:** `Telegram Bot API` · `Gmail` · `Google Sheets` · `Bitrix24 REST API` · `Notion API` · `HH.ru API`  
+**Code:** `JavaScript` for Code node · basic `Python` · REST API · JSON  
+**Tools:** `Git` · `GitHub` · `Docker` · `VS Code`
+
+---
+
+## How I Approach Automation Projects
+
+1. I start with the business process: where time is lost, where manual work happens, where errors appear.
+2. I sketch the workflow: input data, branches, integrations, fallback logic.
+3. I build an MVP and test it on sample data.
+4. I add error handling, logging, and clear node names.
+5. I document the project: README, sample input, workflow export, and architecture screenshot.
+
+---
+
+## Contacts
 
 - Telegram: [@Andyyy_Randyyy](https://t.me/Andyyy_Randyyy)
 - GitHub: [Andy-randy](https://github.com/Andy-randy)
