@@ -1,4 +1,3 @@
-[README_main_profile_rewritten.md](https://github.com/user-attachments/files/27321882/README_main_profile_rewritten.md)
 # Daria Lesnikova ·
 
 **n8n Automation Specialist · LLM Workflows · AI Agents**
