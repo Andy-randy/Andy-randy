@@ -1,4 +1,4 @@
-# Daria Lesnikova ·
+# Daria Lesnikova · n8n Automation Specialist
 
 **n8n Automation Specialist · LLM Workflows · AI Agents**
 
@@ -32,6 +32,38 @@ I build practical automation workflows that reduce manual work: lead routing, AI
 ---
 
 ## Избранные проекты
+
+### 🤖 RAG Telegram FAQ Bot
+
+**Задача:** создать Telegram-бота, который отвечает на вопросы пользователей на основе собственной базы знаний.
+
+**Как работает:**
+
+```text
+Telegram Trigger
+→ Switch (/start)
+├── Start → Welcome Message
+└── Question
+    → AI Agent
+    → Supabase Vector Store
+    → Groq LLM
+    → Telegram Response
+    → Google Sheets Logging
+```
+
+**Что важно:**
+
+- Используется Retrieval-Augmented Generation (RAG).
+- Документы загружаются из PDF в Supabase Vector Store.
+- AI Agent отвечает только на основе найденных фрагментов.
+- Все вопросы и ответы сохраняются в Google Sheets.
+- Реализовано onboarding-сообщение по команде `/start`.
+
+**Стек:** `n8n` · `Telegram Bot API` · `Supabase` · `pgvector` · `Hugging Face Embeddings` · `Groq` · `Google Drive` · `Google Sheets`
+
+[📂 Открыть проект](https://github.com/Andy-randy/n8n-portfolio/tree/main/04-rag-telegram-faq-bot)
+
+---
 
 ### 🤖 AI-ассистент, который сам закрывает заказы
 
@@ -131,8 +163,8 @@ Schedule / Manual Trigger
 ## Технический стек
 
 **Automation:** `n8n` · Webhook · Schedule Trigger · Switch · IF · Loop · Aggregate · Error handling  
-**AI / LLM:** `Groq` · AI Agent · Simple Memory · structured JSON output · prompt engineering  
-**Integrations:** `Telegram Bot API` · `Gmail` · `Google Sheets` · `Bitrix24 REST API` · `Notion API` · `HH.ru API`  
+**AI / LLM:** `Groq` · AI Agent · Simple Memory · RAG · structured JSON output · prompt engineering  
+**Integrations:** `Telegram Bot API` · `Gmail` · `Google Sheets` · `Bitrix24 REST API` · `Notion API` · `HH.ru API` · `Supabase`  
 **Code:** `JavaScript` для Code node · базовый `Python` · REST API · JSON  
 **Tools:** `Git` · `GitHub` · `Docker` · `VS Code`
 
@@ -162,14 +194,7 @@ Schedule / Manual Trigger
 
 I am developing as an automation specialist focused on **n8n, LLM workflows, and API integrations**.
 
-My focus is not “a bot for the sake of a bot”, but practical business automation:
-
-- incoming lead processing;
-- AI lead qualification;
-- Telegram and email notifications;
-- CRM, Google Sheets, Notion, and external API integrations;
-- data parsing and normalization;
-- workflow documentation so the project can be maintained or handed over.
+My focus is not “a bot for the sake of a bot”, but practical business automation.
 
 Main project repository: [`n8n-portfolio`](https://github.com/Andy-randy/n8n-portfolio)
 
@@ -180,6 +205,38 @@ Main project repository: [`n8n-portfolio`](https://github.com/Andy-randy/n8n-por
 ---
 
 ## Selected Projects
+
+### 🤖 RAG Telegram FAQ Bot
+
+**Goal:** build a Telegram bot that answers questions using a custom knowledge base.
+
+**Workflow:**
+
+```text
+Telegram Trigger
+→ Switch (/start)
+├── Welcome Message
+└── User Question
+    → AI Agent
+    → Supabase Vector Store
+    → Groq LLM
+    → Telegram Response
+    → Google Sheets Logging
+```
+
+**Key points:**
+
+- Uses Retrieval-Augmented Generation (RAG).
+- PDF documents are embedded and stored in Supabase Vector Store.
+- The AI Agent answers only using retrieved context.
+- All questions and answers are logged to Google Sheets.
+- Includes a `/start` onboarding flow.
+
+**Stack:** `n8n` · `Telegram Bot API` · `Supabase` · `pgvector` · `Hugging Face Embeddings` · `Groq` · `Google Drive` · `Google Sheets`
+
+[📂 Open Project](https://github.com/Andy-randy/n8n-portfolio/tree/main/04-rag-telegram-faq-bot)
+
+---
 
 ### 🤖 AI Assistant That Closes Orders
 
@@ -223,14 +280,6 @@ Webhook
 └── fallback → Telegram error notification
 ```
 
-**Key points:**
-
-- The AI Agent analyzes the meaning of the request, not just keywords.
-- The Code node cleans and parses the model’s JSON output.
-- The budget is extracted from the request text.
-- Hot leads are sent to Bitrix24 CRM through REST API.
-- Invalid AI output is handled through a fallback branch.
-
 **Stack:** `n8n` · `Groq` · `Webhook` · `JavaScript` · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
 
 ---
@@ -251,13 +300,6 @@ Schedule / Manual Trigger
 → Telegram digest
 ```
 
-**Key points:**
-
-- Deterministic logic checks objective conditions: salary and work format.
-- The LLM evaluates semantic relevance.
-- Matching vacancies are collected into a Telegram digest.
-- Non-matching vacancies are logged separately so nothing gets lost.
-
 **Stack:** `n8n` · `Groq` · `HH.ru API` · `Telegram Bot API` · `JavaScript`
 
 ---
@@ -266,33 +308,23 @@ Schedule / Manual Trigger
 
 The portfolio also includes:
 
-- RSS / news digest automation;
-- e-commerce order processing;
-- HR onboarding workflow;
-- financial monitoring;
-- AI content repurposing;
-- customer support routing;
-- Notion API automations.
+- RSS / news digest automation
+- E-commerce order processing
+- HR onboarding workflow
+- Financial monitoring
+- AI content repurposing
+- Customer support routing
+- Notion API automations
 
 ---
 
 ## Technical Stack
 
-**Automation:** `n8n` · Webhook · Schedule Trigger · Switch · IF · Loop · Aggregate · Error handling  
-**AI / LLM:** `Groq` · AI Agent · Simple Memory · structured JSON output · prompt engineering  
-**Integrations:** `Telegram Bot API` · `Gmail` · `Google Sheets` · `Bitrix24 REST API` · `Notion API` · `HH.ru API`  
-**Code:** `JavaScript` for Code node · basic `Python` · REST API · JSON  
-**Tools:** `Git` · `GitHub` · `Docker` · `VS Code`
-
----
-
-## How I Approach Automation Projects
-
-1. I start with the business process: where time is lost, where manual work happens, where errors appear.
-2. I sketch the workflow: input data, branches, integrations, fallback logic.
-3. I build an MVP and test it on sample data.
-4. I add error handling, logging, and clear node names.
-5. I document the project: README, sample input, workflow export, and architecture screenshot.
+**Automation:** `n8n`, Webhooks, Schedules, Switch, IF, Loops  
+**AI / LLM:** `Groq`, AI Agent, RAG, Prompt Engineering  
+**Integrations:** Telegram, Gmail, Google Sheets, Notion, Supabase, Bitrix24  
+**Code:** JavaScript, Python basics, REST APIs, JSON  
+**Tools:** Git, GitHub, Docker, VS Code
 
 ---
 
