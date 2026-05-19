@@ -20,7 +20,7 @@ I build practical automation workflows that reduce manual work: lead routing, AI
 - AI-квалификация лидов;
 - Telegram- и email-уведомления;
 - интеграции с CRM, Google Sheets, Notion и внешними API;
-- парсинг и нормализация данных;
+- парсинг, мониторинг цен и нормализация данных;
 - workflow-документация, чтобы проект можно было передать другому человеку.
 
 Основной репозиторий с проектами: [`n8n-portfolio`](https://github.com/Andy-randy/n8n-portfolio)
@@ -62,6 +62,35 @@ Telegram Trigger
 **Стек:** `n8n` · `Telegram Bot API` · `Supabase` · `pgvector` · `Hugging Face Embeddings` · `Groq` · `Google Drive` · `Google Sheets`
 
 [📂 Открыть проект](https://github.com/Andy-randy/n8n-portfolio/tree/main/04-rag-telegram-faq-bot)
+
+---
+
+### 📉 Мониторинг цен конкурентов
+
+**Задача:** автоматически отслеживать цены конкурентов и быстро получать уведомления об изменениях.
+
+**Как работает:**
+
+```text
+Schedule Trigger
+→ Competitors list
+→ HTML parsing + custom price enrichment
+→ Google Sheets history
+→ Price comparison
+→ Telegram daily report / AI price alert
+```
+
+**Что важно:**
+
+- Workflow собирает товары с нескольких e-commerce сайтов.
+- Для сайта со скрытыми ценами используется отдельный JSON-запрос.
+- Цены нормализуются и сравниваются с историей в Google Sheets.
+- Telegram получает ежедневный отчёт и отдельные alert-сообщения.
+- AI Agent кратко объясняет изменение цены.
+
+**Стек:** `n8n` · `JavaScript` · `Google Sheets` · `Telegram Bot API` · `Groq`
+
+[📂 Открыть проект](https://github.com/Andy-randy/n8n-portfolio/tree/main/05-competitor-price-%26-offer-monitoring-system)
 
 ---
 
@@ -235,6 +264,35 @@ Telegram Trigger
 **Stack:** `n8n` · `Telegram Bot API` · `Supabase` · `pgvector` · `Hugging Face Embeddings` · `Groq` · `Google Drive` · `Google Sheets`
 
 [📂 Open Project](https://github.com/Andy-randy/n8n-portfolio/tree/main/04-rag-telegram-faq-bot)
+
+---
+
+### 📉 Competitor Price Monitoring
+
+**Goal:** automatically monitor competitor prices and receive alerts when prices change.
+
+**Workflow:**
+
+```text
+Schedule Trigger
+→ Competitors list
+→ HTML parsing + custom price enrichment
+→ Google Sheets history
+→ Price comparison
+→ Telegram daily report / AI price alert
+```
+
+**Key points:**
+
+- The workflow collects products from multiple e-commerce websites.
+- A custom JSON request handles a website with hidden prices.
+- Prices are normalized and compared with Google Sheets history.
+- Telegram receives daily reports and separate price alerts.
+- AI Agent briefly explains each price change.
+
+**Stack:** `n8n` · `JavaScript` · `Google Sheets` · `Telegram Bot API` · `Groq`
+
+[📂 Open Project](https://github.com/Andy-randy/n8n-portfolio/tree/main/05-competitor-price-%26-offer-monitoring-system)
 
 ---
 
