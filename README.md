@@ -1,393 +1,76 @@
-# Daria Lesnikova · n8n Automation Specialist
+# Daria Lesnikova — AI Automation & Integration Engineer
 
-**n8n Automation Specialist · LLM Workflows · AI Agents**
+I design reliable business workflows with n8n, AI/LLMs, APIs, CRM systems, and data tools.
 
-I build practical automation workflows that reduce manual work: lead routing, AI-assisted customer communication, data parsing, CRM updates, notifications, and structured reporting.
+My projects focus on the parts that make automation maintainable: data contracts, deterministic routing, controlled AI outputs, failure paths, operational visibility, testing, and handover-ready documentation.
 
-[🇷🇺 По-русски](#-по-русски) · [🇬🇧 In English](#-in-english)
+[Portfolio](https://github.com/Andy-randy/n8n-portfolio) · [Русское резюме](#по-русски) · [Telegram](https://t.me/Andyyy_Randyyy)
 
----
+## What I build
 
-## 🇷🇺 По-русски
+- AI-assisted lead qualification and request triage with validated model outputs
+- API and webhook workflows with authentication, idempotency, and explicit responses
+- RAG systems with separate ingestion and query boundaries
+- CRM, Telegram, Gmail, Google Sheets, Notion, and external REST API integrations
+- Scheduled monitoring, data normalization, operator alerts, and reporting
+- Documentation and test scenarios that make workflow behavior reviewable
 
-### Кто я
+## Featured case studies
 
-Я развиваюсь как специалист по автоматизации на базе **n8n, LLM и API-интеграций**.
+| Case study | Business use case | Engineering signal | Stack |
+| --- | --- | --- | --- |
+| [Barbershop Booking API](https://github.com/Andy-randy/barbershop-booking-api) | Validate, store, deduplicate, and notify on bookings | Modular workflows, practical idempotency, async notifications, centralized errors | n8n, Webhooks, Google Sheets, Telegram, Gmail |
+| [RAG Telegram FAQ Bot](https://github.com/Andy-randy/rag-telegram-faq-bot) | Answer support questions from a controlled knowledge base | Separate ingestion/query paths and explicit retrieval limitations | n8n, Supabase, pgvector, Hugging Face, Groq, Telegram |
+| [AI Lead Processing Pipeline](https://github.com/Andy-randy/ai-lead-processing-pipeline) | Qualify and route inbound sales leads | Validation before AI, parsed model contract, deterministic routing | n8n, Groq, CRM API, Telegram, Gmail, Google Sheets |
+| [Competitor Price Monitoring](https://github.com/Andy-randy/n8n-portfolio/tree/main/05-competitor-price-monitoring) | Detect changes on public product pages | Deterministic comparison, explicit extraction failures, AI-only enrichment | n8n, JavaScript, Groq, Google Sheets, Telegram |
 
-Мой фокус — не «бот ради бота», а рабочие процессы для бизнеса:
+The complete project index, exports, examples, screenshots, test scenarios, and limitations are in the [n8n Automation & Integration Portfolio](https://github.com/Andy-randy/n8n-portfolio).
 
-- обработка входящих заявок;
-- AI-квалификация лидов;
-- Telegram- и email-уведомления;
-- интеграции с CRM, Google Sheets, Notion и внешними API;
-- парсинг, мониторинг цен и нормализация данных;
-- workflow-документация, чтобы проект можно было передать другому человеку.
-
-Основной репозиторий с проектами: [`n8n-portfolio`](https://github.com/Andy-randy/n8n-portfolio)
-
-**Сейчас:** открыта к freelance-задачам и junior / junior+ позициям в automation / workflow engineering.  
-**В фокусе роста:** RAG, Supabase / vector DB, Docker, production deployment, прикладной Python.  
-**Языки:** русский, английский.
-
----
-
-## Избранные проекты
-
-### 🤖 RAG Telegram FAQ Bot
-
-**Задача:** создать Telegram-бота, который отвечает на вопросы пользователей на основе собственной базы знаний.
-
-**Как работает:**
+## Engineering approach
 
 ```text
-Telegram Trigger
-→ Switch (/start)
-├── Start → Welcome Message
-└── Question
-    → AI Agent
-    → Supabase Vector Store
-    → Groq LLM
-    → Telegram Response
-    → Google Sheets Logging
+Business process
+→ boundaries and data contracts
+→ deterministic workflow + selective AI
+→ validation and failure paths
+→ observability and testing
+→ handover-ready documentation
 ```
 
-**Что важно:**
+I use AI where semantic judgment adds value and keep validation, permissions, routing, and state transitions deterministic whenever possible.
 
-- Используется Retrieval-Augmented Generation (RAG).
-- Документы загружаются из PDF в Supabase Vector Store.
-- AI Agent отвечает только на основе найденных фрагментов.
-- Все вопросы и ответы сохраняются в Google Sheets.
-- Реализовано onboarding-сообщение по команде `/start`.
+I treat a successful demo as the beginning of review: retries, idempotency, partial failures, concurrency, personal-data handling, and deployment constraints still need explicit decisions.
 
-**Стек:** `n8n` · `Telegram Bot API` · `Supabase` · `pgvector` · `Hugging Face Embeddings` · `Groq` · `Google Drive` · `Google Sheets`
+## Core stack
 
-[📂 Открыть проект](https://github.com/Andy-randy/n8n-portfolio/tree/main/04-rag-telegram-faq-bot)
+**Automation:** n8n, webhooks, scheduled workflows, sub-workflows, Error Workflows
 
----
+**AI & data:** LLM agents, structured outputs, RAG, embeddings, Supabase / pgvector, Google Sheets
 
-### 📉 Мониторинг цен конкурентов
+**Integrations:** REST APIs, CRM systems, Telegram Bot API, Gmail, Google Drive, Notion
 
-**Задача:** автоматически отслеживать цены конкурентов и быстро получать уведомления об изменениях.
+**Code & tools:** JavaScript, JSON, Git, GitHub, Docker, VS Code
 
-**Как работает:**
+## Current focus / availability
 
-```text
-Schedule Trigger
-→ Competitors list
-→ HTML parsing + custom price enrichment
-→ Google Sheets history
-→ Price comparison
-→ Telegram daily report / AI price alert
-```
+Current focus: orchestration, state, memory, reliable tool use, and production deployment.
 
-**Что важно:**
+Open to freelance automation projects and AI automation / integration roles.
 
-- Workflow собирает товары с нескольких e-commerce сайтов.
-- Для сайта со скрытыми ценами используется отдельный JSON-запрос.
-- Цены нормализуются и сравниваются с историей в Google Sheets.
-- Telegram получает ежедневный отчёт и отдельные alert-сообщения.
-- AI Agent кратко объясняет изменение цены.
+Working languages: Russian and English.
 
-**Стек:** `n8n` · `JavaScript` · `Google Sheets` · `Telegram Bot API` · `Groq`
-
-[📂 Открыть проект](https://github.com/Andy-randy/n8n-portfolio/tree/main/05-competitor-price-%26-offer-monitoring-system)
-
----
-
-### 🤖 AI-ассистент, который сам закрывает заказы
-
-**Задача:** автоматизировать общение с клиентом от первого сообщения до подтверждения заказа.
-
-**Как работает:**
-
-```text
-Telegram Trigger
-→ AI Agent + Simple Memory
-→ проверка готовности к заказу
-→ Google Sheets
-→ Telegram-уведомление менеджеру
-```
-
-**Что важно:**
-
-- AI Agent ведёт диалог и собирает данные клиента.
-- Simple Memory хранит контекст разговора.
-- LLM сама определяет, когда данных достаточно для оформления заказа.
-- Менеджер получает уже структурированную заявку, а не сырую переписку.
-
-**Стек:** `n8n` · `Groq` · `Telegram Bot API` · `Google Sheets`
-
----
-
-### 🎯 Воронка лидов с LLM-классификатором
-
-**Задача:** автоматически разделять входящие заявки на холодные, тёплые и горячие.
-
-**Как работает:**
-
-```text
-Webhook
-→ AI Agent
-→ Code node
-→ Switch
-├── холодный лид → email + Google Sheets
-├── тёплый лид → email + Google Sheets
-├── горячий лид → Telegram manager ping + Bitrix24 CRM
-└── fallback → Telegram error notification
-```
-
-**Что важно:**
-
-- AI Agent анализирует заявку по смыслу, а не по ключевым словам.
-- Code node чистит и парсит JSON-ответ модели.
-- Из текста заявки извлекается бюджет.
-- Для горячего лида создаётся сделка в Bitrix24 через REST API.
-- Ошибки AI-формата уходят в fallback-ветку.
-
-**Стек:** `n8n` · `Groq` · `Webhook` · `JavaScript` · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
-
----
-
-### 🔍 Умный парсер вакансий с LLM-скорингом
-
-**Задача:** сократить ручную фильтрацию вакансий и оставлять только релевантные варианты.
-
-**Как работает:**
-
-```text
-Schedule / Manual Trigger
-→ HH.ru API
-→ JavaScript normalization
-→ Loop Over Items
-→ AI scoring
-→ IF filter
-→ Telegram digest
-```
-
-**Что важно:**
-
-- Детерминированная логика проверяет объективные условия: зарплата, формат работы.
-- LLM оценивает смысловую релевантность вакансии.
-- Результаты собираются в Telegram-дайджест.
-- Неподходящие вакансии тоже логируются отдельно, чтобы ничего не терялось.
-
-**Стек:** `n8n` · `Groq` · `HH.ru API` · `Telegram Bot API` · `JavaScript`
-
----
-
-## Дополнительные проекты
-
-В портфолио также есть:
-
-- RSS / news digest automation;
-- e-commerce order processing;
-- HR onboarding workflow;
-- financial monitoring;
-- AI content repurposing;
-- customer support routing;
-- Notion API automations.
-
----
-
-## Технический стек
-
-**Automation:** `n8n` · Webhook · Schedule Trigger · Switch · IF · Loop · Aggregate · Error handling  
-**AI / LLM:** `Groq` · AI Agent · Simple Memory · RAG · structured JSON output · prompt engineering  
-**Integrations:** `Telegram Bot API` · `Gmail` · `Google Sheets` · `Bitrix24 REST API` · `Notion API` · `HH.ru API` · `Supabase`  
-**Code:** `JavaScript` для Code node · базовый `Python` · REST API · JSON  
-**Tools:** `Git` · `GitHub` · `Docker` · `VS Code`
-
----
-
-## Как я подхожу к автоматизации
-
-1. Сначала разбираю бизнес-процесс: где теряется время, где ручной труд, где ошибки.
-2. Рисую схему workflow: входные данные, ветки, интеграции, fallback.
-3. Собираю MVP и проверяю на тестовых данных.
-4. Добавляю обработку ошибок, логирование и понятные названия нод.
-5. Документирую проект: README, пример входных данных, workflow export, скрин архитектуры.
-
----
-
-## Контакты
+## Contact
 
 - Telegram: [@Andyyy_Randyyy](https://t.me/Andyyy_Randyyy)
 - GitHub: [Andy-randy](https://github.com/Andy-randy)
-- Workflow portfolio: [n8n-portfolio](https://github.com/Andy-randy/n8n-portfolio)
+- Portfolio: [n8n-portfolio](https://github.com/Andy-randy/n8n-portfolio)
 
 ---
 
-## 🇬🇧 In English
+## По-русски
 
-### About me
+Я проектирую надёжные бизнес-процессы на базе n8n, AI/LLM, API, CRM и систем хранения данных. Основной фокус — не отдельный «бот», а весь рабочий контур: входные данные, границы компонентов, маршрутизация, ошибки, наблюдаемость и передача проекта.
 
-I am developing as an automation specialist focused on **n8n, LLM workflows, and API integrations**.
+В портфолио лучше начать с Barbershop Booking API, RAG Telegram FAQ Bot, AI Lead Processing Pipeline и Competitor Price Monitoring. В README проектов есть схемы, workflow exports, примеры контрактов, тестовые сценарии, известные ограничения и план production hardening.
 
-My focus is not “a bot for the sake of a bot”, but practical business automation.
-
-Main project repository: [`n8n-portfolio`](https://github.com/Andy-randy/n8n-portfolio)
-
-**Currently:** open to freelance tasks and junior / junior+ automation or workflow engineering roles.  
-**Growing into:** RAG, Supabase / vector DBs, Docker, production deployment, practical Python.  
-**Languages:** Russian, English.
-
----
-
-## Selected Projects
-
-### 🤖 RAG Telegram FAQ Bot
-
-**Goal:** build a Telegram bot that answers questions using a custom knowledge base.
-
-**Workflow:**
-
-```text
-Telegram Trigger
-→ Switch (/start)
-├── Welcome Message
-└── User Question
-    → AI Agent
-    → Supabase Vector Store
-    → Groq LLM
-    → Telegram Response
-    → Google Sheets Logging
-```
-
-**Key points:**
-
-- Uses Retrieval-Augmented Generation (RAG).
-- PDF documents are embedded and stored in Supabase Vector Store.
-- The AI Agent answers only using retrieved context.
-- All questions and answers are logged to Google Sheets.
-- Includes a `/start` onboarding flow.
-
-**Stack:** `n8n` · `Telegram Bot API` · `Supabase` · `pgvector` · `Hugging Face Embeddings` · `Groq` · `Google Drive` · `Google Sheets`
-
-[📂 Open Project](https://github.com/Andy-randy/n8n-portfolio/tree/main/04-rag-telegram-faq-bot)
-
----
-
-### 📉 Competitor Price Monitoring
-
-**Goal:** automatically monitor competitor prices and receive alerts when prices change.
-
-**Workflow:**
-
-```text
-Schedule Trigger
-→ Competitors list
-→ HTML parsing + custom price enrichment
-→ Google Sheets history
-→ Price comparison
-→ Telegram daily report / AI price alert
-```
-
-**Key points:**
-
-- The workflow collects products from multiple e-commerce websites.
-- A custom JSON request handles a website with hidden prices.
-- Prices are normalized and compared with Google Sheets history.
-- Telegram receives daily reports and separate price alerts.
-- AI Agent briefly explains each price change.
-
-**Stack:** `n8n` · `JavaScript` · `Google Sheets` · `Telegram Bot API` · `Groq`
-
-[📂 Open Project](https://github.com/Andy-randy/n8n-portfolio/tree/main/05-competitor-price-%26-offer-monitoring-system)
-
----
-
-### 🤖 AI Assistant That Closes Orders
-
-**Goal:** automate customer communication from the first message to order confirmation.
-
-**Workflow:**
-
-```text
-Telegram Trigger
-→ AI Agent + Simple Memory
-→ order readiness check
-→ Google Sheets
-→ Telegram manager notification
-```
-
-**Key points:**
-
-- The AI Agent talks to the customer and collects order details.
-- Simple Memory keeps the conversation context.
-- The LLM decides when enough information has been collected.
-- The manager receives structured order data instead of raw chat messages.
-
-**Stack:** `n8n` · `Groq` · `Telegram Bot API` · `Google Sheets`
-
----
-
-### 🎯 Lead Funnel With an LLM Classifier
-
-**Goal:** automatically classify incoming leads as cold, warm, or hot.
-
-**Workflow:**
-
-```text
-Webhook
-→ AI Agent
-→ Code node
-→ Switch
-├── cold lead → email + Google Sheets
-├── warm lead → email + Google Sheets
-├── hot lead → Telegram manager ping + Bitrix24 CRM
-└── fallback → Telegram error notification
-```
-
-**Stack:** `n8n` · `Groq` · `Webhook` · `JavaScript` · `Gmail` · `Telegram` · `Google Sheets` · `Bitrix24 REST API`
-
----
-
-### 🔍 Smart Vacancy Parser With LLM Scoring
-
-**Goal:** reduce manual job-search filtering and keep only relevant vacancies.
-
-**Workflow:**
-
-```text
-Schedule / Manual Trigger
-→ HH.ru API
-→ JavaScript normalization
-→ Loop Over Items
-→ AI scoring
-→ IF filter
-→ Telegram digest
-```
-
-**Stack:** `n8n` · `Groq` · `HH.ru API` · `Telegram Bot API` · `JavaScript`
-
----
-
-## Additional Projects
-
-The portfolio also includes:
-
-- RSS / news digest automation
-- E-commerce order processing
-- HR onboarding workflow
-- Financial monitoring
-- AI content repurposing
-- Customer support routing
-- Notion API automations
-
----
-
-## Technical Stack
-
-**Automation:** `n8n`, Webhooks, Schedules, Switch, IF, Loops  
-**AI / LLM:** `Groq`, AI Agent, RAG, Prompt Engineering  
-**Integrations:** Telegram, Gmail, Google Sheets, Notion, Supabase, Bitrix24  
-**Code:** JavaScript, Python basics, REST APIs, JSON  
-**Tools:** Git, GitHub, Docker, VS Code
-
----
-
-## Contacts
-
-- Telegram: [@Andyyy_Randyyy](https://t.me/Andyyy_Randyyy)
-- GitHub: [Andy-randy](https://github.com/Andy-randy)
-- Workflow portfolio: [n8n-portfolio](https://github.com/Andy-randy/n8n-portfolio)
+Открыта к freelance-проектам по автоматизации и ролям в AI automation / integration. Связаться можно через [Telegram](https://t.me/Andyyy_Randyyy).
